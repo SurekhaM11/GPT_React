@@ -1,0 +1,28 @@
+[
+    {
+        "id":"wallet",
+        "path":"wallet",
+        "item":"wallet"
+    },
+    {
+        "id":"buytokens",
+        "path":"buytokens",
+        "item":"buytokens"
+    },
+    {
+        "id":"feedback",
+        "path":"feedback",
+        "item":"feedback"
+    },
+    {
+        "id":"balance",
+        "path":"balance",
+        "item":"balance"
+    },
+    {
+        "id":"settings",
+        "path":"settings",
+        "item":"settings"
+    }
+    
+]

@@ -1,0 +1,24 @@
+.menu {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  text-align: right;
+  /* background: #ddddef; */
+  color: rgb(186, 218, 85);
+  line-height: 40px;
+  font-size: 24px;
+}
+
+.menu > li {
+  display: inline;
+  margin-right: 15px;
+  /* letter-spacing: 5px; */
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.menuActive {
+  color: rgb(136, 156, 231);
+  font-weight: bold;
+  text-shadow: 2px 2px 2px white;
+}
