@@ -136,7 +136,7 @@
   font-family: Inter;
   font-weight: 500;
   /* margin-left: 10px;
-              margin-top: 6px; */
+                margin-top: 6px; */
 }
 .badge {
   background-color: rgb(186, 218, 85);
@@ -161,7 +161,7 @@
   font-weight: 500;
   margin-left: -5%;
   /* margin-left: 10px;
-              margin-top: 6px; */
+                margin-top: 6px; */
 }
 .homepage_rectangle783 {
   width: 70%;
@@ -206,14 +206,13 @@
   align-self: center;
   color: white;
 }
-.middle_container2 {
+.middle-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 65%;
-  margin-bottom: 3%;
+  height: 70%;
 }
 .custom_scrollbar {
   overflow-y: hidden;
@@ -398,12 +397,50 @@
 .cancel_btn_div {
   margin-top: 1%;
 }
-.grey_button {
-  width: 219.5px;
-  /* height: 46px; */
+.homepage_text02 {
+  color: rgb(186, 218, 85);
+  font-size: 1.7rem;
+  font-style: Semi Bold;
+  font-family: Inter;
+  font-weight: 700;
+}
+.desktop14_text08 {
+  color: rgba(255, 255, 255, 1);
+  font-size: 30px;
+  font-style: Semi Bold;
+  text-align: center;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+
+.desktop14_text10 {
+  color: rgba(255, 255, 255, 1);
+  font-size: 15px;
+  font-style: SemiBold;
+  text-align: center;
+  font-family: Sarabun;
+  font-weight: 600;
+  margin-top: 20px;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.desktop14_image1 {
+  width: 185px;
+  height: 185px;
+  border-color: transparent;
+  background-color: #ffffff;
+  padding: 0.5rem;
+}
+
+.desktop9_button {
+  width: 219px;
   border-radius: 5px;
   border: none;
   font-size: 16px;
+  align-self: auto;
   font-style: SemiBold;
   text-align: center;
   font-family: Sarabun;
@@ -414,28 +451,5 @@
   background-color: rgb(136, 156, 231);
   color: #000;
   cursor: pointer;
-}
-.green_button {
-  width: 219px;
-  /* height: 46px; */
-  border-radius: 5px;
-  border: none;
-  font-size: 16px;
-  font-style: SemiBold;
-  text-align: center;
-  font-family: Sarabun;
-  font-weight: 600;
-  line-height: 24px;
-  font-stretch: normal;
-  text-decoration: none;
-  background-color: rgb(186, 218, 85);
-  cursor: pointer;
-  color: #000;
-}
-.homepage_text02 {
-  color: rgb(186, 218, 85);
-  font-size: 1.7rem;
-  font-style: Semi Bold;
-  font-family: Inter;
-  font-weight: 700;
+  margin-top: 10%;
 }

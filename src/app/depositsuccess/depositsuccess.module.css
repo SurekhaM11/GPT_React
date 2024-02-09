@@ -393,7 +393,7 @@
   padding: 1.2rem;
 }
 .btn_div {
-  margin-top: 5%;
+  margin-top: 6%;
 }
 .cancel_btn_div {
   margin-top: 1%;
@@ -438,4 +438,59 @@
   font-style: Semi Bold;
   font-family: Inter;
   font-weight: 700;
+}
+.congrats-check {
+  margin-top: 2%;
+  width: 10%;
+  height: 10%;
+}
+.congrats-text25 {
+  color: rgba(255, 255, 255, 1);
+  width: 257px;
+  height: auto;
+  font-size: 28px;
+  font-style: Bold;
+  text-align: center;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.desktop15-text11 {
+  margin-top: 3%;
+  color: rgba(255, 255, 255, 1);
+  width: 240px;
+  height: auto;
+  font-size: 15px;
+  align-self: auto;
+  font-style: SemiBold;
+  text-align: center;
+  font-family: Sarabun;
+  font-weight: 600;
+  line-height: 24px;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.desktop9_button {
+  width: 219px;
+  /* height: 36.38484191894531px; */
+  /* z-index: 2; */
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
+  align-self: auto;
+  font-style: SemiBold;
+  text-align: center;
+  font-family: Sarabun;
+  font-weight: 600;
+  line-height: 24px;
+  font-stretch: normal;
+  text-decoration: none;
+  background-color: rgb(136, 156, 231);
+  color: #000;
+  cursor: pointer;
+  margin-top: 10%;
 }

@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import styles from "./wallet.module.css";
 import { Menu } from "@/Menu";
 import { useRouter } from "next/navigation";
+
 const wallet = () => {
   const router = useRouter();
   const fnWithdraw = () => {

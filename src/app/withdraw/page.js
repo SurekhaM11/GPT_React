@@ -6,9 +6,15 @@ import { Menu } from "@/Menu";
 import { useRouter } from "next/navigation";
 const withdraw = () => {
   const router = useRouter();
+  const fnCancel = () => {
+    alert("cancel");
+    let path = "/wallet";
+    router.push(`${path}`);
+  };
   const fnWithdraw = () => {
+    event.preventDefault();
     alert("fnWithdraw success");
-    const path = "/withdrawsuccess";
+    let path = "/withdrawsuccess";
     router.push(`${path}`);
     console.log("path:", path);
   };
@@ -114,7 +120,11 @@ const withdraw = () => {
                 </form>
 
                 <div className={styles.cancel_btn_div}>
-                  <button id="cancel-btn" className={styles.grey_button}>
+                  <button
+                    id="cancel-btn"
+                    className={styles.grey_button}
+                    onClick={fnCancel}
+                  >
                     Cancel
                   </button>
                 </div>

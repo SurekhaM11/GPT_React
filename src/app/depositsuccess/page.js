@@ -1,23 +1,9 @@
 "use client";
-import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import styles from "./deposit.module.css";
 import { Menu } from "@/Menu";
-import { useRouter } from "next/navigation";
+import React from "react";
+import styles from "./depositsuccess.module.css";
 
-const deposit = () => {
-  const router = useRouter();
-  const fnCancel = () => {
-    alert("cancel");
-    let path = "/wallet";
-    router.push(`${path}`);
-  };
-  const fnDeposit = () => {
-    event.preventDefault();
-    alert("fn deposit ");
-    let path = "/depositsuccess";
-    router.push(`${path}`);
-  };
+const depositsuccess = () => {
   return (
     <div className={styles.homedefault_container}>
       <div className={styles.homedefault_homedefault}>
@@ -93,42 +79,23 @@ const deposit = () => {
                   </span>
                 </div>
 
-                <form id="code" className={styles.form_div}>
-                  <div className="form-group">
-                    <label>Code entry here</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="locker-code"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Memo</label>
-                    <input type="text" className="form-control" id="memo" />
-                  </div>
-                  <div id="loading-div" style={{ display: "none" }}>
-                    {" "}
-                    Processing...
-                  </div>
+                <img
+                  src="check1109-9g1.svg"
+                  alt="check1109"
+                  className={styles.congrats_check}
+                />
+                <div className={styles.congrats_text25}>
+                  <span>Congrats!</span>
+                </div>
 
-                  <div className={styles.btn_div}>
-                    <button
-                      className={styles.green_button}
-                      id="import"
-                      onClick={fnDeposit}
-                    >
-                      Deposit Coins
-                    </button>
-                  </div>
-                </form>
-
-                <div className={styles.cancel_btn_div}>
-                  <button
-                    id="cancel-btn"
-                    className={styles.grey_button}
-                    onClick={fnCancel}
-                  >
-                    Cancel
+                <div className={styles.desktop15_text11}>
+                  <span id="result">
+                    "You’ve successfully deposited PlayCoins!
+                  </span>
+                </div>
+                <div className={styles.desktop9_btn_div}>
+                  <button className={styles.desktop9_button}>
+                    Return Home
                   </button>
                 </div>
               </div>
@@ -243,4 +210,4 @@ const deposit = () => {
   );
 };
 
-export default deposit;
+export default depositsuccess;

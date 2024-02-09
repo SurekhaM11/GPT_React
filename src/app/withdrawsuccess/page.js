@@ -1,23 +1,8 @@
 "use client";
 import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import styles from "./deposit.module.css";
+import styles from "./withdrawsuccess.module.css";
 import { Menu } from "@/Menu";
-import { useRouter } from "next/navigation";
-
-const deposit = () => {
-  const router = useRouter();
-  const fnCancel = () => {
-    alert("cancel");
-    let path = "/wallet";
-    router.push(`${path}`);
-  };
-  const fnDeposit = () => {
-    event.preventDefault();
-    alert("fn deposit ");
-    let path = "/depositsuccess";
-    router.push(`${path}`);
-  };
+const withdrawsuccess = () => {
   return (
     <div className={styles.homedefault_container}>
       <div className={styles.homedefault_homedefault}>
@@ -68,7 +53,7 @@ const deposit = () => {
                 </div>
                 <span
                   className={styles.badge1}
-                  style={{ display: "none" }}
+                  style={{ display: " none" }}
                   id="gptCount"
                 >
                   <span className={styles.badge_text1}>0</span>
@@ -83,53 +68,34 @@ const deposit = () => {
                   <div className={styles.raida}>RAIDA</div>
                 </div>
               </div>
-              <hr className={styles.line1} />
+              <hr className={styles.line1}></hr>
 
-              <div className={styles.middle_container2}>
-                <div className={styles.wallet_balance000pc1}>
-                  <span id="balance-div"></span>
-                  <span className={styles.wallet_text25}>
-                    <span>AVAILABLE BALANCE</span>
+              <div class="middle_container">
+                <div class="desktop14_text08">
+                  <span>Withdrawal Successful!</span>
+                </div>
+                <div class="desktop14_text10">
+                  <span id="transmit-code">"Your 7 digit QR code is:"</span>
+                  <span
+                    style={{
+                      display: "block",
+                      color: "#39D02B",
+                      fontSize: "24px",
+                    }}
+                    id="code"
+                  >
+                    ABC-DEFG
                   </span>
                 </div>
 
-                <form id="code" className={styles.form_div}>
-                  <div className="form-group">
-                    <label>Code entry here</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="locker-code"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Memo</label>
-                    <input type="text" className="form-control" id="memo" />
-                  </div>
-                  <div id="loading-div" style={{ display: "none" }}>
-                    {" "}
-                    Processing...
-                  </div>
+                <form action="/" id="qr-generation-form"></form>
+                <br />
+                <div class="desktop14_image1">
+                  <div id="qr-code"></div>
+                </div>
 
-                  <div className={styles.btn_div}>
-                    <button
-                      className={styles.green_button}
-                      id="import"
-                      onClick={fnDeposit}
-                    >
-                      Deposit Coins
-                    </button>
-                  </div>
-                </form>
-
-                <div className={styles.cancel_btn_div}>
-                  <button
-                    id="cancel-btn"
-                    className={styles.grey_button}
-                    onClick={fnCancel}
-                  >
-                    Cancel
-                  </button>
+                <div class="desktop9_btn_div">
+                  <button className={styles.desktop9_button}>Copy Code</button>
                 </div>
               </div>
 
@@ -228,9 +194,9 @@ const deposit = () => {
             </span>
             <a
               id="myAnchor1"
-              href="http://www.gptanonymous.com/privacy"
-              target="_blank"
-              className={styles.footer_text}
+              href="https://www.gptanonymous.com/privacy"
+              target="_blank}
+        className={styles.footer_text"
             >
               <span>Privacy Policy</span>&nbsp;&nbsp;
               <span>Terms and Services</span>
@@ -238,9 +204,8 @@ const deposit = () => {
           </div>
         </div>
       </div>
-      ;
     </div>
   );
 };
 
-export default deposit;
+export default withdrawsuccess;
