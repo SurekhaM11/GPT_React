@@ -1,22 +1,16 @@
 "use client";
-import React, { useEffect } from "react";
-import styles from "./wallet.module.css";
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import styles from "./withdraw.module.css";
 import { Menu } from "@/Menu";
 import { useRouter } from "next/navigation";
-const wallet = () => {
+const withdraw = () => {
   const router = useRouter();
   const fnWithdraw = () => {
-    alert("withdraw");
-    //console.log("Navigating to settings page...");
-    const path = "/withdraw";
+    alert("fnWithdraw success");
+    const path = "/withdrawsuccess";
     router.push(`${path}`);
-    //console.log("After router push");
-  };
-
-  const fnDeposit = () => {
-    alert("deposit");
-    const path = "/deposit";
-    router.push(`${path}`);
+    console.log("path:", path);
   };
   return (
     <div className={styles.homedefault_container}>
@@ -68,7 +62,7 @@ const wallet = () => {
                 </div>
                 <span
                   className={styles.badge1}
-                  style={{ display: " none" }}
+                  style={{ display: "none" }}
                   id="gptCount"
                 >
                   <span className={styles.badge_text1}>0</span>
@@ -85,21 +79,43 @@ const wallet = () => {
               </div>
               <hr className={styles.line1}></hr>
 
-              <div className={styles.middle_container}>
+              <div className={styles.middle_container2}>
                 <div className={styles.wallet_balance000pc1}>
-                  <span id="balance_div"></span>
+                  <span id="balance-div"></span>
                   <span className={styles.wallet_text25}>
                     <span>AVAILABLE BALANCE</span>
                   </span>
                 </div>
 
-                <div className={styles.imp_exp_btn}>
-                  <button className={styles.import_btn} onClick={fnDeposit}>
-                    Deposit
-                  </button>
+                <form id="code" className={styles.form_div}>
+                  <div class="form-group">
+                    <label>Enter amount here</label>
+                    <input type="text" class="form-control" id="amount" />
+                  </div>
+                  <div class="form-group">
+                    <label>Memo</label>
+                    <input type="text" class="form-control" id="memo" />
+                  </div>
+                  <div id="loading-div" style={{ display: "none" }}>
+                    {" "}
+                    Processing...
+                  </div>
 
-                  <button className={styles.export_btn} onClick={fnWithdraw}>
-                    Withdraw
+                  <div className={styles.btn_div}>
+                    <button
+                      type="submit"
+                      className={styles.green_button}
+                      id="export"
+                      onClick={fnWithdraw}
+                    >
+                      Withdraw Coins
+                    </button>
+                  </div>
+                </form>
+
+                <div className={styles.cancel_btn_div}>
+                  <button id="cancel-btn" className={styles.grey_button}>
+                    Cancel
                   </button>
                 </div>
               </div>
@@ -199,9 +215,9 @@ const wallet = () => {
             </span>
             <a
               id="myAnchor1"
-              href="https://www.gptanonymous.com/privacy"
-              target="_blank}
-        className={styles.footer_text"
+              href="http://www.gptanonymous.com/privacy"
+              target="_blank"
+              className={styles.footer_text}
             >
               <span>Privacy Policy</span>&nbsp;&nbsp;
               <span>Terms and Services</span>
@@ -213,4 +229,4 @@ const wallet = () => {
   );
 };
 
-export default wallet;
+export default withdraw;
