@@ -1,24 +1,8 @@
-"use client";
-import React, { useEffect } from "react";
-import styles from "./wallet.module.css";
+import React from "react";
+import styles from "./raida-status.module.css";
 import { Menu } from "@/Menu";
-import { useRouter } from "next/navigation";
-
-const wallet = () => {
-  const router = useRouter();
-  const fnWithdraw = () => {
-    alert("withdraw");
-    //console.log("Navigating to settings page...");
-    const path = "/withdraw";
-    router.push(`${path}`);
-    //console.log("After router push");
-  };
-
-  const fnDeposit = () => {
-    alert("deposit");
-    const path = "/deposit";
-    router.push(`${path}`);
-  };
+import "bootstrap/dist/css/bootstrap.min.css";
+const raida_status = () => {
   return (
     <div className={styles.homedefault_container}>
       <div className={styles.homedefault_homedefault}>
@@ -69,7 +53,7 @@ const wallet = () => {
                 </div>
                 <span
                   className={styles.badge1}
-                  style={{ display: " none" }}
+                  style={{ display: "none" }}
                   id="gptCount"
                 >
                   <span className={styles.badge_text1}>0</span>
@@ -84,27 +68,37 @@ const wallet = () => {
                   <div className={styles.raida}>RAIDA</div>
                 </div>
               </div>
-              <hr className={styles.line1}></hr>
+              <hr className={styles.line1} />
 
-              <div className={styles.middle_container}>
-                <div className={styles.wallet_balance000pc1}>
-                  <span id="balance_div"></span>
-                  <span className={styles.wallet_text25}>
-                    <span>AVAILABLE BALANCE</span>
-                  </span>
+              <span className={styles.rai_astatus_text010}>
+                <span>
+                  TIMED OUT means the response exceeded the 10 seconds allowed.
+                  This could be caused by a slow network or because the RAIDA
+                  was blocked (usually by office routers). It could also be
+                  caused by your computer being old and unable to handle 25
+                  threads at once. Try changing your settings to increate the
+                  Timeout or try using a more powerful computer.
+                </span>
+              </span>
+              <div class="row">
+                <div className={styles.rai_astatus_text012}>
+                  <div id="statesCol1"></div>
                 </div>
-
-                <div className={styles.imp_exp_btn}>
-                  <button className={styles.import_btn} onClick={fnDeposit}>
-                    Deposit
-                  </button>
-
-                  <button className={styles.export_btn} onClick={fnWithdraw}>
-                    Withdraw
-                  </button>
+                <div className={styles.rai_astatus_text076}>
+                  <div id="statesCol2"></div>
                 </div>
               </div>
 
+              <div className={styles.rai_astatus_text010}>
+                <span>
+                  TIMED OUT means the response exceeded the 10 seconds allowed.
+                  This could be caused by a slow network or because the RAIDA
+                  was blocked (usually by office routers). It could also be
+                  caused by your computer being old and unable to handle 25
+                  threads at once. Try changing your settings to increate the
+                  Timeout or try using a more powerful computer.
+                </span>
+              </div>
               <div className={styles.icons2}>
                 <a href="wallet.html">
                   <svg
@@ -125,7 +119,7 @@ const wallet = () => {
                   </svg>
                 </a>
 
-                <a href="/transactions">
+                <a href="transactions.html">
                   <svg
                     className={styles.transactions_icon}
                     viewBox="0 0 41 41"
@@ -170,7 +164,7 @@ const wallet = () => {
                   </svg>
                 </a>
 
-                <a href="/raida-status">
+                <a href="raida-status.html">
                   <svg
                     className={styles.status_icon}
                     fill="none"
@@ -200,9 +194,9 @@ const wallet = () => {
             </span>
             <a
               id="myAnchor1"
-              href="https://www.gptanonymous.com/privacy"
-              target="_blank}
-        className={styles.footer_text"
+              href="http://www.gptanonymous.com/privacy"
+              target="_blank"
+              className={styles.footer_text}
             >
               <span>Privacy Policy</span>&nbsp;&nbsp;
               <span>Terms and Services</span>
@@ -210,8 +204,9 @@ const wallet = () => {
           </div>
         </div>
       </div>
+      ;
     </div>
   );
 };
 
-export default wallet;
+export default raida_status;

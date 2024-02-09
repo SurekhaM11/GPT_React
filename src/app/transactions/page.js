@@ -1,24 +1,8 @@
-"use client";
-import React, { useEffect } from "react";
-import styles from "./wallet.module.css";
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import styles from "./transacations.module.css";
 import { Menu } from "@/Menu";
-import { useRouter } from "next/navigation";
-
-const wallet = () => {
-  const router = useRouter();
-  const fnWithdraw = () => {
-    alert("withdraw");
-    //console.log("Navigating to settings page...");
-    const path = "/withdraw";
-    router.push(`${path}`);
-    //console.log("After router push");
-  };
-
-  const fnDeposit = () => {
-    alert("deposit");
-    const path = "/deposit";
-    router.push(`${path}`);
-  };
+const transacations = () => {
   return (
     <div className={styles.homedefault_container}>
       <div className={styles.homedefault_homedefault}>
@@ -79,34 +63,40 @@ const wallet = () => {
 
             <div className={styles.homepage_rectangle783} id="chat-body">
               <div className={styles.flexContainer1}>
-                <span className={styles.homepage_text02}>Wallet</span>
+                <span className={styles.homepage_text02}>Transactions</span>
                 <div className={styles.raida_status} id="signalWrap">
                   <div className={styles.raida}>RAIDA</div>
                 </div>
               </div>
               <hr className={styles.line1}></hr>
-
-              <div className={styles.middle_container}>
-                <div className={styles.wallet_balance000pc1}>
-                  <span id="balance_div"></span>
-                  <span className={styles.wallet_text25}>
-                    <span>AVAILABLE BALANCE</span>
-                  </span>
-                </div>
-
-                <div className={styles.imp_exp_btn}>
-                  <button className={styles.import_btn} onClick={fnDeposit}>
-                    Deposit
-                  </button>
-
-                  <button className={styles.export_btn} onClick={fnWithdraw}>
-                    Withdraw
-                  </button>
-                </div>
+              <div
+                className={[
+                  "example_container",
+                  "tableFixHead",
+                  "custom_scrollbar",
+                ]}
+                id="table1"
+              >
+                <table
+                  id="table"
+                  className={styles.trans_table}
+                  style={{ borderSpacing: "50px", backgroundColor: "#494949" }}
+                >
+                  <thead>
+                    <tr>
+                      <th class="tabheader">Date & Time</th>
+                      <th class="tabheader">Memo</th>
+                      <th class="tabheader">Type</th>
+                      <th class="tabheader">Amount</th>
+                      <th class="tabheader">Balance</th>
+                    </tr>
+                  </thead>
+                  <tbody id="statements"></tbody>
+                </table>
               </div>
 
               <div className={styles.icons2}>
-                <a href="wallet.html">
+                <a href="/wallet">
                   <svg
                     className={styles.home_icon}
                     xmlns="http://www.w3.org/2000/svg"
@@ -214,4 +204,4 @@ const wallet = () => {
   );
 };
 
-export default wallet;
+export default transacations;
