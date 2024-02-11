@@ -1,8 +1,31 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import styles from "@/Home/Home.module.css";
 import Link from "next/link";
 import { Menu } from "@/Menu";
+import { Api } from "@/app/common/Api";
+import { useDispatch } from "react-redux";
 export const Home = () => {
+  const [balance, setBalance] = useState(0);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    fnBalance();
+  }, [balance]);
+  const fnBalance = async () => {
+    try {
+      console.log("fn balance called ");
+      const result = await Api.getBalance("/wallets");
+      var data = await result.data;
+      console.log("result", data.payload[0].balance);
+      setBalance(data.payload[0].balance);
+      dispatch({
+        type: "BAL_UPDATE",
+        payload: balance,
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  };
   return (
     <div className={styles.homedefault_container}>
       <div className={styles.homedefault_homedefault}>

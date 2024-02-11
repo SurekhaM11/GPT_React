@@ -1,11 +1,12 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./wallet.module.css";
 import { Menu } from "@/Menu";
 import { useRouter } from "next/navigation";
-
+import { Api } from "../common/Api";
 const wallet = () => {
   const router = useRouter();
+
   const fnWithdraw = () => {
     alert("withdraw");
     //console.log("Navigating to settings page...");
@@ -106,7 +107,7 @@ const wallet = () => {
               </div>
 
               <div className={styles.icons2}>
-                <a href="wallet.html">
+                <a href="/wallet">
                   <svg
                     className={styles.home_icon}
                     xmlns="http://www.w3.org/2000/svg"
