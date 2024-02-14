@@ -1,23 +1,82 @@
 "use client";
-import React from "react";
+import React, { useRef, useState, useCallback, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./deposit.module.css";
 import { Menu } from "@/Menu";
 import { useRouter } from "next/navigation";
-
-const deposit = () => {
+import { useForm } from "react-hook-form";
+import { connect } from "react-redux";
+import { Api } from "../common/Api";
+import { toast } from "react-toastify";
+let deposit = (props) => {
   const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    formState: { errors },
+  } = useForm();
+  const wallet_balance = localStorage.getItem("wallet_balance");
+  const regex = /^[0-9A-Z]{3}-[0-9A-Z]{4}$/;
+
+  useEffect(() => {
+    //getRaida();
+  });
   const fnCancel = () => {
-    alert("cancel");
     let path = "/wallet";
     router.push(`${path}`);
   };
-  const fnDeposit = () => {
-    event.preventDefault();
-    alert("fn deposit ");
-    let path = "/depositsuccess";
-    router.push(`${path}`);
+
+  const onSubmit = async () => {
+    const formValues = getValues();
+    const walletName = {
+      name: "Default",
+      tag: formValues.memo,
+    };
+
+    try {
+      const lockerResponse = await Api.postLockerCode(
+        "locker",
+        formValues.lockercode,
+        walletName
+      );
+      const lockerData = lockerResponse.data;
+
+      if (lockerData.status === "success") {
+        const taskId = lockerData.payload.id;
+
+        const checkTaskStatus = async () => {
+          const taskIdResponse = await Api.getTaskId(taskId);
+          const taskData = taskIdResponse.data;
+
+          if (taskData.payload.status === "completed") {
+            toast.success("Success.");
+            console.log("Success from task call");
+            router.push("/depositsuccess");
+          } else if (
+            taskData.payload.status === "error" ||
+            taskData.payload.code === 4121
+          ) {
+            console.log("Error from locker call:", taskData.message);
+            //alert("deposit-fail with error code 4121");
+            router.push("/deposit-fail");
+          } else {
+            setTimeout(checkTaskStatus, 500); // Check status again after 500ms
+          }
+        };
+
+        // Start checking task status
+        checkTaskStatus();
+      } else {
+        console.log("Error from locker call:", lockerData.error);
+        //alert("deposit-fail with error locker call");
+        //router.push("/deposit-fail");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
+
   return (
     <div className={styles.homedefault_container}>
       <div className={styles.homedefault_homedefault}>
@@ -87,54 +146,60 @@ const deposit = () => {
 
               <div className={styles.middle_container2}>
                 <div className={styles.wallet_balance000pc1}>
-                  <span id="balance-div"></span>
+                  <span className={styles.wallet_balance}>
+                    <div>{wallet_balance}</div>
+                  </span>
                   <span className={styles.wallet_text25}>
                     <span>AVAILABLE BALANCE</span>
                   </span>
                 </div>
 
-                <form id="code" className={styles.form_div}>
-                  <div className="form-group">
-                    <label>Code entry here</label>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <div className={styles.form_group}>
                     <input
-                      type="text"
-                      className="form-control"
-                      id="locker-code"
+                      placeholder="Locker Code"
+                      className={styles.form_control}
+                      {...register("lockercode", {
+                        required: "This field is required",
+                        pattern: {
+                          value: regex,
+                          message: "Please enter valid code",
+                        },
+                      })}
                     />
-                  </div>
-                  <div className="form-group">
-                    <label>Memo</label>
-                    <input type="text" className="form-control" id="memo" />
-                  </div>
-                  <div id="loading-div" style={{ display: "none" }}>
-                    {" "}
-                    Processing...
+                    {errors.lockercode && (
+                      <span className={styles.error_message}>
+                        {errors.lockercode.message}
+                      </span>
+                    )}
                   </div>
 
+                  <div className={styles.form_group}>
+                    <input
+                      placeholder="Memo"
+                      {...register("memo")}
+                      className={styles.form_control}
+                    />
+                  </div>
                   <div className={styles.btn_div}>
-                    <button
-                      className={styles.green_button}
-                      id="import"
-                      onClick={fnDeposit}
-                    >
+                    <button type="submit" className={styles.green_button}>
                       Deposit Coins
                     </button>
                   </div>
+                  <div className={styles.cancel_btn_div}>
+                    <button
+                      type="button"
+                      className={styles.grey_button}
+                      onClick={fnCancel}
+                    >
+                      Cancel
+                    </button>
+                  </div>
                 </form>
-
-                <div className={styles.cancel_btn_div}>
-                  <button
-                    id="cancel-btn"
-                    className={styles.grey_button}
-                    onClick={fnCancel}
-                  >
-                    Cancel
-                  </button>
-                </div>
               </div>
 
               <div className={styles.icons2}>
-                <a href="wallet.html">
+                <a href="/wallet">
                   <svg
                     className={styles.home_icon}
                     xmlns="http://www.w3.org/2000/svg"
@@ -153,7 +218,7 @@ const deposit = () => {
                   </svg>
                 </a>
 
-                <a href="transactions.html">
+                <a href="/transactions">
                   <svg
                     className={styles.transactions_icon}
                     viewBox="0 0 41 41"
@@ -198,7 +263,7 @@ const deposit = () => {
                   </svg>
                 </a>
 
-                <a href="raida-status.html">
+                <a href="/raida-status">
                   <svg
                     className={styles.status_icon}
                     fill="none"
@@ -242,5 +307,12 @@ const deposit = () => {
     </div>
   );
 };
+
+deposit = connect(function (state) {
+  const { wallet_balance } = state?.appReducer;
+  return {
+    wallet_balance: wallet_balance,
+  };
+})(deposit);
 
 export default deposit;

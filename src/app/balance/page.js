@@ -8,7 +8,7 @@ let balance = (props) => {
 
 balance = connect(function (state) {
   const { wallet_balance } = state?.appReducer;
-  console.log("bal:", wallet_balance);
+  //console.log("bal:", wallet_balance);
   return {
     wallet_balance: wallet_balance,
   };

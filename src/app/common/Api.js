@@ -7,16 +7,37 @@ export class Api {
     return axios.get(BASE_URL + url);
   }
 
-  static fnSendGetReq(url) {
+  static getEcho(url) {
     return axios.get(BASE_URL + url);
   }
-  static fnSendPostReq(url, data) {
-    return axios.post(BASE_URL + url, data);
+  static getTaskId(taskId) {
+    //console.log("task id");
+    return axios.get(`${BASE_URL}/tasks/${taskId}`);
   }
-  static fnSendPuttReq(url) {
-    return axios.put(BASE_URL + url);
+  static postLockerCode(url, lockerCode, WalletName) {
+    // console.log("input parameters:url:", url);
+    // console.log("locker code:", lockerCode);
+    // console.log("wallet name:", WalletName);
+    // console.log("url :", `${BASE_URL}/${url}/${lockerCode}`);
+    return axios.post(`${BASE_URL}/${url}/${lockerCode}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      name: WalletName.name,
+      tag: WalletName.tag,
+    });
   }
-  static fnsendDeleteReq(url) {
-    return axios.delete(BASE_URL + url);
-  }
+
+  // static fnSendGetReq(url) {
+  //   return axios.get(BASE_URL + url);
+  // }
+  // static fnSendPostReq(url, data) {
+  //   return axios.post(BASE_URL + url, data);
+  // }
+  // static fnSendPuttReq(url) {
+  //   return axios.put(BASE_URL + url);
+  // }
+  // static fnsendDeleteReq(url) {
+  //   return axios.delete(BASE_URL + url);
+  // }
 }

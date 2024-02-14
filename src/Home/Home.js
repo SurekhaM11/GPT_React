@@ -18,6 +18,7 @@ export const Home = () => {
       var data = await result.data;
       console.log("result", data.payload[0].balance);
       setBalance(data.payload[0].balance);
+      localStorage.setItem("wallet_balance", data.payload[0].balance);
       dispatch({
         type: "BAL_UPDATE",
         payload: balance,

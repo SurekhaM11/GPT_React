@@ -2,8 +2,13 @@
 import React from "react";
 import styles from "./deposit-fail.module.css";
 import { Menu } from "@/Menu";
+import { useRouter } from "next/navigation";
 
 const deposit_fail = () => {
+  const router = useRouter();
+  const fnHome = () => {
+    router.push("/wallet");
+  };
   return (
     <div className={styles.homedefault_container}>
       <div className={styles.homedefault_homedefault}>
@@ -71,29 +76,31 @@ const deposit_fail = () => {
               </div>
               <hr className={styles.line1} />
 
-              <div class="middle_container2">
-                <div class="form_group1">
-                  <label>Connection Lost</label>
+              <div className={styles.middle_container2}>
+                <div className={styles.form_group1}>
+                  <label>Error Occurred</label>
                   <img
                     src="rectangle7823922-jsak-200h.png"
                     alt="Rectangle7823922"
-                    class="desktop15_rectangle782"
+                    className={styles.desktop15_rectangle782}
                   />
                 </div>
 
-                <div class="desktop15_text11">
+                <div className={styles.desktop15_text11}>
                   <span>
-                    Raida cannot be connected due to lack of signal. Please
-                    check your internet connection and try again!
+                    You might have entered either an expired code or an invalid
+                    code. Please try again!
                   </span>
                 </div>
-                <div class="desktop9_btn_div">
-                  <button class="desktop9_button">Try Again</button>
+                <div className={styles.desktop9_btn_div}>
+                  <button className={styles.desktop9_button} onClick={fnHome}>
+                    Try Again
+                  </button>
                 </div>
               </div>
 
               <div className={styles.icons2}>
-                <a href="wallet.html">
+                <a href="/wallet">
                   <svg
                     className={styles.home_icon}
                     xmlns="http://www.w3.org/2000/svg"
@@ -112,7 +119,7 @@ const deposit_fail = () => {
                   </svg>
                 </a>
 
-                <a href="transactions.html">
+                <a href="/transactions">
                   <svg
                     className={styles.transactions_icon}
                     viewBox="0 0 41 41"
@@ -157,7 +164,7 @@ const deposit_fail = () => {
                   </svg>
                 </a>
 
-                <a href="raida-status.html">
+                <a href="/raida-status">
                   <svg
                     className={styles.status_icon}
                     fill="none"

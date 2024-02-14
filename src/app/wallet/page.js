@@ -1,22 +1,23 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styles from "./wallet.module.css";
 import { Menu } from "@/Menu";
 import { useRouter } from "next/navigation";
-import { Api } from "../common/Api";
-const wallet = () => {
+import { connect } from "react-redux";
+import { getRaida } from "../common/getRaida";
+let wallet = (props) => {
   const router = useRouter();
-
+  const wallet_balance = localStorage.getItem("wallet_balance");
+  useEffect(() => {
+    //getRaida();
+    console.log("wallet bal", props.wallet_balance);
+  });
   const fnWithdraw = () => {
-    alert("withdraw");
-    //console.log("Navigating to settings page...");
     const path = "/withdraw";
     router.push(`${path}`);
-    //console.log("After router push");
   };
 
   const fnDeposit = () => {
-    alert("deposit");
     const path = "/deposit";
     router.push(`${path}`);
   };
@@ -89,9 +90,13 @@ const wallet = () => {
 
               <div className={styles.middle_container}>
                 <div className={styles.wallet_balance000pc1}>
-                  <span id="balance_div"></span>
+                  <span className={styles.wallet_balance}>
+                    <div>{wallet_balance}</div>
+                  </span>
                   <span className={styles.wallet_text25}>
-                    <span>AVAILABLE BALANCE</span>
+                    <span>
+                      AVAILABLE BALANCE<span></span>
+                    </span>
                   </span>
                 </div>
 
@@ -214,5 +219,13 @@ const wallet = () => {
     </div>
   );
 };
+
+wallet = connect(function (state) {
+  const { wallet_balance } = state?.appReducer;
+  console.log("wallet bal: from connect", wallet_balance);
+  return {
+    wallet_balance: wallet_balance,
+  };
+})(wallet);
 
 export default wallet;

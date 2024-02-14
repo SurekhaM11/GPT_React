@@ -2,8 +2,14 @@
 import { Menu } from "@/Menu";
 import React from "react";
 import styles from "./depositsuccess.module.css";
+import { useRouter } from "next/navigation";
 
 const depositsuccess = () => {
+  const wallet_balance = localStorage.getItem("wallet_balance");
+  const fnHome = () => {
+    router.push("/wallet");
+  };
+  const router = useRouter();
   return (
     <div className={styles.homedefault_container}>
       <div className={styles.homedefault_homedefault}>
@@ -73,7 +79,9 @@ const depositsuccess = () => {
 
               <div className={styles.middle_container2}>
                 <div className={styles.wallet_balance000pc1}>
-                  <span id="balance-div"></span>
+                  <span className={styles.wallet_balance}>
+                    <div>{wallet_balance}</div>
+                  </span>
                   <span className={styles.wallet_text25}>
                     <span>AVAILABLE BALANCE</span>
                   </span>
@@ -94,14 +102,14 @@ const depositsuccess = () => {
                   </span>
                 </div>
                 <div className={styles.desktop9_btn_div}>
-                  <button className={styles.desktop9_button}>
+                  <button className={styles.desktop9_button} onClick={fnHome}>
                     Return Home
                   </button>
                 </div>
               </div>
 
               <div className={styles.icons2}>
-                <a href="wallet.html">
+                <a href="/wallet">
                   <svg
                     className={styles.home_icon}
                     xmlns="http://www.w3.org/2000/svg"
@@ -120,7 +128,7 @@ const depositsuccess = () => {
                   </svg>
                 </a>
 
-                <a href="transactions.html">
+                <a href="/transactions">
                   <svg
                     className={styles.transactions_icon}
                     viewBox="0 0 41 41"
@@ -165,7 +173,7 @@ const depositsuccess = () => {
                   </svg>
                 </a>
 
-                <a href="raida-status.html">
+                <a href="/raida-status">
                   <svg
                     className={styles.status_icon}
                     fill="none"
