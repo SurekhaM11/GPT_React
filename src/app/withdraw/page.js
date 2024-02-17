@@ -4,8 +4,20 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./withdraw.module.css";
 import { Menu } from "@/Menu";
 import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { connect } from "react-redux";
+import { Api } from "../common/Api";
+import { toast } from "react-toastify";
 const withdraw = () => {
   const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    formState: { errors },
+  } = useForm();
+  const wallet_balance = localStorage.getItem("wallet_balance");
+  const regex = /^\d{1,8}$/;
   const fnCancel = () => {
     alert("cancel");
     let path = "/wallet";
@@ -17,6 +29,73 @@ const withdraw = () => {
     let path = "/withdrawsuccess";
     router.push(`${path}`);
     console.log("path:", path);
+  };
+  const onSubmit = async () => {
+    const formValues = getValues();
+    console.log("form values:", formValues);
+    const walletData = {
+      name: "Default",
+      amount: Number(formValues.amount),
+      tag: formValues.memo,
+    };
+    const response = await Api.getBalance("/wallets");
+    //await fetch(`${baseURL}/wallets`);
+    var data = await response.data;
+    console.log("data:", data);
+    var bal = data.payload[0].balance;
+    if (formValues.amount <= bal) {
+      try {
+        const response = await Api.fnpostLocker("locker", walletData);
+        console.log("response", response.data);
+
+        const responseData = response.data;
+        console.log("response", responseData.status);
+        // const lockerData = lockerResponse.data;
+
+        // if (lockerData.status === "success") {
+
+        if (responseData.status === "success") {
+          const taskId = responseData.payload.id;
+
+          const checkTaskStatus = async () => {
+            const taskIdResponse = await Api.getTaskId(taskId);
+            const taskData = taskIdResponse.data;
+
+            if (taskData.payload.status === "completed") {
+              toast.success("Success.");
+              console.log("Success from task call", taskData.payload);
+              console.log(
+                "transmit code:",
+                taskData.payload.data.transmit_code
+              );
+              localStorage.setItem(
+                "transmit_code",
+                taskData.payload.data.transmit_code
+              );
+              router.push("/withdrawsuccess");
+            } else if (
+              taskData.payload.status === "error" ||
+              taskData.payload.code === 4121
+            ) {
+              console.log("Error from locker call:", taskData.message);
+              //alert("deposit-fail with error code 4121");
+              router.push("/withdraw-fail");
+            } else {
+              setTimeout(checkTaskStatus, 500);
+            }
+          };
+          checkTaskStatus();
+        } else {
+          console.log("Error from locker withdraw call:", response.error);
+          //alert("deposit-fail with error locker call");
+        }
+      } catch (error) {
+        console.error("error ...", error);
+      }
+    } else {
+      console.log("insuffiecint funds");
+      router.push("/withdraw-insufficient");
+    }
   };
   return (
     <div className={styles.homedefault_container}>
@@ -87,51 +166,61 @@ const withdraw = () => {
 
               <div className={styles.middle_container2}>
                 <div className={styles.wallet_balance000pc1}>
-                  <span id="balance-div"></span>
+                  <span className={styles.wallet_balance}>
+                    <div>{wallet_balance}</div>
+                  </span>
                   <span className={styles.wallet_text25}>
                     <span>AVAILABLE BALANCE</span>
                   </span>
                 </div>
 
-                <form id="code" className={styles.form_div}>
-                  <div class="form-group">
-                    <label>Enter amount here</label>
-                    <input type="text" class="form-control" id="amount" />
-                  </div>
-                  <div class="form-group">
-                    <label>Memo</label>
-                    <input type="text" class="form-control" id="memo" />
-                  </div>
-                  <div id="loading-div" style={{ display: "none" }}>
-                    {" "}
-                    Processing...
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <div className={styles.form_group}>
+                    <input
+                      placeholder="Amount"
+                      className={styles.form_control}
+                      {...register("amount", {
+                        required: "This field is required",
+                        pattern: {
+                          value: regex,
+                          message:
+                            "Only numbers are allowed and the amount must not exceed 8 decimal places!",
+                        },
+                      })}
+                    />
+                    {errors.amount && (
+                      <span className={styles.error_message}>
+                        {errors.amount.message}
+                      </span>
+                    )}
                   </div>
 
+                  <div className={styles.form_group}>
+                    <input
+                      placeholder="Memo"
+                      {...register("memo")}
+                      className={styles.form_control}
+                    />
+                  </div>
                   <div className={styles.btn_div}>
-                    <button
-                      type="submit"
-                      className={styles.green_button}
-                      id="export"
-                      onClick={fnWithdraw}
-                    >
+                    <button type="submit" className={styles.green_button}>
                       Withdraw Coins
                     </button>
                   </div>
+                  <div className={styles.cancel_btn_div}>
+                    <button
+                      type="button"
+                      className={styles.grey_button}
+                      onClick={fnCancel}
+                    >
+                      Cancel
+                    </button>
+                  </div>
                 </form>
-
-                <div className={styles.cancel_btn_div}>
-                  <button
-                    id="cancel-btn"
-                    className={styles.grey_button}
-                    onClick={fnCancel}
-                  >
-                    Cancel
-                  </button>
-                </div>
               </div>
 
               <div className={styles.icons2}>
-                <a href="wallet.html">
+                <a href="/wallet">
                   <svg
                     className={styles.home_icon}
                     xmlns="http://www.w3.org/2000/svg"
@@ -150,7 +239,7 @@ const withdraw = () => {
                   </svg>
                 </a>
 
-                <a href="transactions.html">
+                <a href="/transactions">
                   <svg
                     className={styles.transactions_icon}
                     viewBox="0 0 41 41"
@@ -195,7 +284,7 @@ const withdraw = () => {
                   </svg>
                 </a>
 
-                <a href="raida-status.html">
+                <a href="/raida-status">
                   <svg
                     className={styles.status_icon}
                     fill="none"

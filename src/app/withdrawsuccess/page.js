@@ -2,7 +2,33 @@
 import React from "react";
 import styles from "./withdrawsuccess.module.css";
 import { Menu } from "@/Menu";
+import Swal from "sweetalert2";
+import $ from "jquery";
+import { QRCodeComp } from "@/QRCodeComp";
+
 const withdrawsuccess = () => {
+  const transmit_code = localStorage.getItem("transmit_code");
+  const copyCode = () => {
+    navigator.clipboard.writeText(transmit_code).then(
+      () => {
+        console.log("Content copied to clipboard");
+        Swal.fire({
+          title:
+            '<span style="color: #DBD9DC">Content copied to clipboard!</span>',
+          confirmButtonText: "Okay",
+          confirmButtonColor: "rgb(136, 156 , 231)",
+        });
+        $(".swal2-modal").css(
+          "background",
+          "linear-gradient( 167.95deg,  rgba(86, 86, 86, 0.86) 4.27%,#000 54.51%,#5f5f5f 91.21%)"
+        );
+      },
+      () => {
+        console.error("Failed to copy");
+      }
+    );
+  };
+
   return (
     <div className={styles.homedefault_container}>
       <div className={styles.homedefault_homedefault}>
@@ -84,23 +110,25 @@ const withdrawsuccess = () => {
                     }}
                     id="code"
                   >
-                    ABC-DEFG
+                    {transmit_code}
                   </span>
                 </div>
 
                 <form action="/" id="qr-generation-form"></form>
                 <br />
-                <div class="desktop14_image1">
+                {/* <div class="desktop14_image1">
                   <div id="qr-code"></div>
-                </div>
-
+                </div> */}
+                <QRCodeComp qrContent={transmit_code} />
                 <div class="desktop9_btn_div">
-                  <button className={styles.desktop9_button}>Copy Code</button>
+                  <button className={styles.desktop9_button} onClick={copyCode}>
+                    Copy Code
+                  </button>
                 </div>
               </div>
 
               <div className={styles.icons2}>
-                <a href="wallet.html">
+                <a href="/wallet">
                   <svg
                     className={styles.home_icon}
                     xmlns="http://www.w3.org/2000/svg"
@@ -119,7 +147,7 @@ const withdrawsuccess = () => {
                   </svg>
                 </a>
 
-                <a href="transactions.html">
+                <a href="/transactions">
                   <svg
                     className={styles.transactions_icon}
                     viewBox="0 0 41 41"
@@ -164,7 +192,7 @@ const withdrawsuccess = () => {
                   </svg>
                 </a>
 
-                <a href="raida-status.html">
+                <a href="/raida-status">
                   <svg
                     className={styles.status_icon}
                     fill="none"

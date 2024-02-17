@@ -3,6 +3,9 @@ import React from "react";
 import { Menu } from "@/Menu";
 import styles from "./withdrawinsufficient.module.css";
 const withdrawinsufficient = () => {
+  const fnHome = () => {
+    router.push("/wallet");
+  };
   return (
     <div className={styles.homedefault_container}>
       <div className={styles.homedefault_homedefault}>
@@ -70,28 +73,30 @@ const withdrawinsufficient = () => {
               </div>
               <hr className={styles.line1}></hr>
 
-              <div class="middle-container2">
-                <div class="form_group1">
-                  <label> Insufficient Funds</label>
+              <div className={styles.middle_container2}>
+                <div className={styles.form_group1}>
+                  <label>Insufficient Funds</label>
                   <img
                     src="rectangle7823922-jsak-200h.png"
                     alt="Rectangle7823922"
-                    class="desktop15_rectangle782"
+                    className={styles.desktop15_rectangle782}
                   />
                 </div>
 
-                <div class="desktop15_text11">
+                <div className={styles.desktop15_text11}>
                   <span>
                     You do not have enough coins to withdraw that amount.
                   </span>
                 </div>
-                <div class="desktop9_btn_div">
-                  <button class="desktop9_button">Return Home</button>
+                <div className={styles.desktop9_btn_div}>
+                  <button className={styles.desktop9_button} onClick={fnHome}>
+                    Return Home
+                  </button>
                 </div>
               </div>
 
               <div className={styles.icons2}>
-                <a href="wallet.html">
+                <a href="/wallet">
                   <svg
                     className={styles.home_icon}
                     xmlns="http://www.w3.org/2000/svg"
@@ -110,7 +115,7 @@ const withdrawinsufficient = () => {
                   </svg>
                 </a>
 
-                <a href="transactions.html">
+                <a href="/transactions">
                   <svg
                     className={styles.transactions_icon}
                     viewBox="0 0 41 41"
@@ -155,7 +160,7 @@ const withdrawinsufficient = () => {
                   </svg>
                 </a>
 
-                <a href="raida-status.html">
+                <a href="/raida-status">
                   <svg
                     className={styles.status_icon}
                     fill="none"

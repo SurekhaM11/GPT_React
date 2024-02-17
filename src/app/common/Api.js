@@ -11,7 +11,7 @@ export class Api {
     return axios.get(BASE_URL + url);
   }
   static getTaskId(taskId) {
-    //console.log("task id");
+    console.log("task id");
     return axios.get(`${BASE_URL}/tasks/${taskId}`);
   }
   static postLockerCode(url, lockerCode, WalletName) {
@@ -25,6 +25,16 @@ export class Api {
       },
       name: WalletName.name,
       tag: WalletName.tag,
+    });
+  }
+  static fnpostLocker(url, walletData) {
+    return axios.post(`${BASE_URL}/${url}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      name: walletData.name,
+      amount: walletData.amount,
+      tag: walletData.tag,
     });
   }
 

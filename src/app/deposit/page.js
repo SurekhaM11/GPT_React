@@ -64,8 +64,6 @@ let deposit = (props) => {
             setTimeout(checkTaskStatus, 500); // Check status again after 500ms
           }
         };
-
-        // Start checking task status
         checkTaskStatus();
       } else {
         console.log("Error from locker call:", lockerData.error);
